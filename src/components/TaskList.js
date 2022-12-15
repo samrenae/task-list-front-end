@@ -4,6 +4,7 @@ import Task from './Task';
 import './TaskList.css';
 
 const TaskList = ({ tasks }) => {
+  const updateComplete = tasks.updateComplete;
   const getTaskListJSX = (tasks) => {
     return tasks.map((task) => {
       return (
@@ -12,6 +13,7 @@ const TaskList = ({ tasks }) => {
           id={task.id}
           title={task.title}
           isComplete={task.isComplete}
+          updateComplete={updateComplete}
         />
       );
     });
@@ -27,6 +29,7 @@ TaskList.propTypes = {
       isComplete: PropTypes.bool.isRequired,
     })
   ).isRequired,
+  updateComplete: PropTypes.func.isRequired,
 };
 
 export default TaskList;
