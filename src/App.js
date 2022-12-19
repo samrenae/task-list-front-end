@@ -24,7 +24,8 @@ const App = () => {
   useEffect(() => {
     axios.get(URL)
     .then((res) => {
-      const tasksAPIResCopy = res.data.map((task) => {
+      const sortedTasks = res.data.sort((a, b) => (a.id > b.id) ? 1 : -1);
+      const tasksAPIResCopy = sortedTasks.map((task) => {
         return{
           ...task,
           isComplete: task.is_complete
