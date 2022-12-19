@@ -7,9 +7,7 @@ const Task = ({ id, title, isComplete, updateComplete, deleteTask }) => {
   // const [complete, setComplete] = useState(isComplete);
   const buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
   const toggleComplete = (id, status) => {
-    console.log(`the value of updateComplete is ${updateComplete}`);
     updateComplete(id, status);
-    
   };
   return (
     <li className="tasks__item">
