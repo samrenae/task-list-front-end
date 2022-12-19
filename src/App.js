@@ -39,46 +39,52 @@ const App = () => {
 
   const updateComplete = (taskId, updatedStatus) => {
     console.log(`${taskId}, ${updatedStatus}`);
-    const newTaskList = [];
-    if (updatedStatus === 'true') {
-      axios.patch( `${URL}/${taskId}/mark_complete`)
-      .then(() => {
-        for (const task of taskList) {
-          if (task.id !== taskId){
-            newTaskList.push(task);
-          } else {
-            const newTask = {
-              ...task,
-              isComplete: updatedStatus
-            };
-            newTaskList.push(newTask);
-          }
-        }
-        setTaskList(newTaskList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    } else {
-      axios.patch( `${URL}/${taskId}/mark_incomplete`)
-      .then(() => {
-        for (const task of taskList) {
-          if (task.id !== taskId){
-            newTaskList.push(task);
-          } else {
-            const newTask = {
-              ...task,
-              isComplete: updatedStatus
-            };
-            newTaskList.push(newTask);
-          }
-        }
-        setTaskList(newTaskList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    let markTask = '';
+    if (updatedStatus === true) {
+      markTask = 'mark_complete';
+    } else if (updatedStatus === false){
+      markTask = 'mark_incomplete';
     }
+    const newTaskList = [];
+    // if (updatedStatus === 'true') {
+      axios.patch( `${URL}/${taskId}/${markTask}`)
+      .then(() => {
+        for (const task of taskList) {
+          if (task.id !== taskId){
+            newTaskList.push(task);
+          } else {
+            const newTask = {
+              ...task,
+              isComplete: updatedStatus
+            };
+            newTaskList.push(newTask);
+          }
+        }
+        setTaskList(newTaskList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // } else {
+    //   axios.patch( `${URL}/${taskId}/mark_incomplete`)
+    //   .then(() => {
+    //     for (const task of taskList) {
+    //       if (task.id !== taskId){
+    //         newTaskList.push(task);
+    //       } else {
+    //         const newTask = {
+    //           ...task,
+    //           isComplete: updatedStatus
+    //         };
+    //         newTaskList.push(newTask);
+    //       }
+    //     }
+    //     setTaskList(newTaskList);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // }
       
   };
 
