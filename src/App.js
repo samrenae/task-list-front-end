@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import TaskList from './components/TaskList.js';
 import './App.css';
+import NewTaskForm from './components/NewTaskForm.js';
 
 // const TASKS = [
 //   {
@@ -21,7 +22,7 @@ const App = () => {
   const [taskList, setTaskList] = useState([]);
   const URL = 'https://task-list-api-c17.herokuapp.com/tasks';
 
-  useEffect(() => {
+  const fetchAllTasks = () => {
     axios.get(URL)
     .then((res) => {
       const sortedTasks = res.data.sort((a, b) => (a.id > b.id) ? 1 : -1);
@@ -36,7 +37,8 @@ const App = () => {
     .catch((err) => {
       console.log(err);
     });
-  }, []);
+  };
+  useEffect(fetchAllTasks, []);
 
   const updateComplete = (taskId, updatedStatus) => {
     console.log(`${taskId}, ${updatedStatus}`);
@@ -105,6 +107,23 @@ const App = () => {
     });
   };
 
+  const addTask = (newTaskInfo) => {
+    axios.post(URL, newTaskInfo)
+    .then((response) => {
+      fetchAllTasks();
+    //   const newTasks = [...taskList];
+    //   const newTaskJSON = {
+    //     ...newTaskInfo,
+    //     'id': response.data.id
+    //   };
+    //   newTasks.push(newTaskJSON);
+    //   setTaskList(newTasks);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -113,6 +132,7 @@ const App = () => {
       <main>
         <div>
           {<TaskList tasks={taskList} updateComplete={updateComplete}  deleteTask={deleteTask}/>}
+          <NewTaskForm addTaskCallback={addTask}/>
         </div>
       </main>
     </div>
