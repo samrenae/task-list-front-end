@@ -44,7 +44,7 @@ const NewTaskForm = (props) => {
             value={formData.title}
             onChange={handleChange}
             onFocus = {(e) => {if (e.target.value === 'New Task') {
-                e.target.value = ''
+                e.target.value = '';
                 }
             }
         }
@@ -57,7 +57,7 @@ const NewTaskForm = (props) => {
             value={formData.description}
             onChange={handleChange}
             onFocus = {(e) => {if (e.target.value === 'Task Desc') {
-                e.target.value = ''
+                e.target.value = '';
                 }
             }
         }
