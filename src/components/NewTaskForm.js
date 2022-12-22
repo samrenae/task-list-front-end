@@ -29,6 +29,8 @@ const NewTaskForm = (props) => {
             title: 'New Task',
             description: 'Task Desc',
         });
+
+    
     };
 
 
@@ -41,16 +43,24 @@ const NewTaskForm = (props) => {
             name = "title"
             value={formData.title}
             onChange={handleChange}
-            onFocus = {(e) => e.target.value = ''}
+            onFocus = {(e) => {if (e.target.value === 'New Task') {
+                e.target.value = ''
+                }
+            }
+        }
         />
-        <label htmlFor="desciption">Task Description</label>
+        <label htmlFor="description">Task Description</label>
         <input
             type = "text"
             id="description"
             name = "description"
             value={formData.description}
             onChange={handleChange}
-            onFocus = {(e) => e.target.value = ''}
+            onFocus = {(e) => {if (e.target.value === 'Task Desc') {
+                e.target.value = ''
+                }
+            }
+        }
         />
 
         <input
